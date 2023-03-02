@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using LearnTestV1.Utilities;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,27 +15,27 @@ namespace LearnTestV1.Pages
                 //Identify and Click on New Button
                 IWebElement CreateNewButton = driver.FindElement(By.XPath("//*[@id=\"container\"]/p/a"));
                 CreateNewButton.Click();
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
 
                 //Select Type Code Drop Down Arrow
                 IWebElement TypeCodeDropDownArrow = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[1]/div/span[1]/span/span[1]"));
                 TypeCodeDropDownArrow.Click();
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
 
                 //Select Time Option from Drop Down
                 IWebElement TimeOption = driver.FindElement(By.XPath("//*[@id=\"TypeCode_listbox\"]/li[2]"));
                 TimeOption.Click();
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
 
                 //Type Code
                 IWebElement CodeTextBox = driver.FindElement(By.XPath("//*[@id=\"Code\"]"));
                 CodeTextBox.SendKeys("123");
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
 
                 //Type Description
                 IWebElement DescriptionTextBox = driver.FindElement(By.XPath("//*[@id=\"Description\"]"));
                 DescriptionTextBox.SendKeys("Numbers");
-                Thread.Sleep(2000);
+                //Thread.Sleep(2000);
 
                 //Type Price Per Unit
                 IWebElement PricePerUnitTextBox = driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]"));
@@ -53,7 +54,7 @@ namespace LearnTestV1.Pages
 
                 //Validate Last Record
                 IWebElement LastRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
-                Thread.Sleep(1000);
+                //Thread.Sleep(1000);
                 if (LastRecord.Text == "123")
                 {
                     Console.WriteLine("New Record Created Successful");
@@ -66,29 +67,32 @@ namespace LearnTestV1.Pages
             }
             public void EditTMPage(IWebDriver driver) 
             {
-                // Click on Edit Buttonto make changes to type Code
+            // Click on Edit Buttonto make changes to type Code
+            Thread.Sleep(1000);
                 driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]")).Click();
                 IWebElement LastRecordEdit = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
                 LastRecordEdit.Click();
-                Thread.Sleep(1000);
+               
 
                 //Identify Code Text Box and clear last record
                 driver.FindElement(By.XPath("//*[@id=\"Code\"]")).Clear();
-                Thread.Sleep(3000);
+                
 
                 //Identify Code Text Box and Write New Record
                 IWebElement CodeTextBox = driver.FindElement(By.XPath("//*[@id=\"Code\"]"));
                 CodeTextBox.SendKeys("123456");
-                Thread.Sleep(2000);
+                
 
                 //Identify and Click on Save Button
                 IWebElement SaveButton = driver.FindElement(By.Id("SaveButton"));
                 SaveButton.Click();
-                Thread.Sleep(3000);
 
-                //Identify and Click on Last Page Button Page
-                driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]")).Click();
-                IWebElement LastEditedRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+
+            //Identify and Click on Last Page Button Page
+            Thread.Sleep(1000);
+            driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]")).Click();
+            Thread.Sleep(1000); 
+            IWebElement LastEditedRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
                 
                 //Validate if Record is edited Successfully or not
                 if (LastEditedRecord.Text == "123456")
@@ -108,7 +112,7 @@ namespace LearnTestV1.Pages
                 // Click on Edit Price Button
                 LastRecordEdit = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
                 LastRecordEdit.Click();
-                Thread.Sleep(1000);
+               
                 
                 //Click on Price Text Box and activate XPath to Pull Information
                 driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]")).Click();
@@ -116,21 +120,26 @@ namespace LearnTestV1.Pages
                 //Click on Price Text Box and clear last record
                 driver.FindElement(By.XPath("//*[@id=\"Price\"]")).Click();
                 driver.FindElement(By.XPath("//*[@id=\"Price\"]")).Clear(); ;
-                Thread.Sleep(3000);
+                
 
                 //Click on Price text box and write new Record
                 IWebElement PricePerUnitTextBox = driver.FindElement(By.XPath("//*[@id=\"Price\"]"));
-                Thread.Sleep(3000);
+                
                 driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]")).SendKeys("123456");
-                Thread.Sleep(2000);
+                
 
                 //Click on Save Button
                 SaveButton = driver.FindElement(By.Id("SaveButton"));
                 SaveButton.Click();
-                Thread.Sleep(3000);
 
-                //Validate if Record is Edited Successfully or Not
-                LastEditedRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+
+                //Click on Goto Last Page Button
+                Thread.Sleep(1000); 
+                    driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]")).Click();
+
+            //Validate if Record is Edited Successfully or Not
+            Thread.Sleep(1000);
+            LastEditedRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
                 if (LastEditedRecord.Text == "$123,456.00")
                 {
                     Console.WriteLine("Record Modified Successfully");
@@ -142,7 +151,9 @@ namespace LearnTestV1.Pages
             }
             public void DeleteTMPage(IWebDriver driver)
             {
-                //Identify and Click on Last Page Button Page
+            //Identify and Click on Last Page Button Page
+            //Wait.WaitToBeClickable(driver, "XPath", 3, "//*[@id=\"tmsGrid\"]/div[4]/a[4]");
+            Thread.Sleep(1000);
                 driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]")).Click();
                 
                 //Find and click on delete button for last record

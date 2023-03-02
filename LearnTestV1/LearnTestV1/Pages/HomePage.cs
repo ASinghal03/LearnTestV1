@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using LearnTestV1.Utilities;
+using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +15,10 @@ namespace LearnTestV1.Pages
             //Identify Administration Drop Down List
             IWebElement AdministrationDropDown = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/a"));
             AdministrationDropDown.Click();
-            Thread.Sleep(1000);
+            
 
             //Select Time and Materials Option
+            Wait.WaitToBeClickable(driver,"XPath", 5, "/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a");
             IWebElement TimeAndMaterialOption = driver.FindElement(By.XPath("/html/body/div[3]/div/div/ul/li[5]/ul/li[3]/a"));
             TimeAndMaterialOption.Click();
         }

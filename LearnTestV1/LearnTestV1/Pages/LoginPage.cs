@@ -37,14 +37,14 @@ namespace LearnTestV1.Pages
                 
                 //Locate Login Button
                 IWebElement LoginButton = driver.FindElement(By.XPath("//*[@id=\"loginForm\"]/form/div[3]/input[1]"));
-                Thread.Sleep(1000);
+                
                 
                 //Click on Login Button
                 LoginButton.Click();
                 IWebElement HelloHari = driver.FindElement(By.XPath("//*[@id=\"logoutForm\"]/ul/li/a"));
                 
                 //Validate if Login is Successfull or Not
-                Thread.Sleep(1000);
+               
                 if (HelloHari.Text == "Hello hari!")
                 {
                     Console.WriteLine("Login Successfully");

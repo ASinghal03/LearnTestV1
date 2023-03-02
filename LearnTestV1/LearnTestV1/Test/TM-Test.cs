@@ -1,37 +1,65 @@
-﻿
-using Aspose.Cells.Charts;
-using LearnTestV1.Pages;
-using OpenQA.Selenium;
+﻿using LearnTestV1.Pages;
+using NUnit.Framework;
 using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.DevTools.V108.Network;
-using OpenQA.Selenium.Edge;
+using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using LearnTestV1.Utilities;
 
-// Open Web Browser
-IWebDriver driver = new ChromeDriver();
-driver.Manage().Window.Maximize();
+namespace LearnTestV1.Test
+{
+    [TestFixture]
+    public class TM_Test : CommonDriver
+    {
+        [SetUp]
+        public void LoginSteps()
+        {
+            // Open Web Browser
+            driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
 
-//Login Page Object Initialization and Definition
-LoginPage LoginPageObj = new LoginPage();
-LoginPageObj.LoginActions(driver);
+            //Login Page Object Initialization and Definition
+            LoginPage LoginPageObj = new LoginPage();
+            LoginPageObj.LoginActions(driver);
 
-//Home Page Object Initialization and Definition
+            //Home Page Object Initialization and Definition
 
-HomePage HomePageObj = new HomePage();
-HomePageObj.GoToTMPage(driver);
+            HomePage HomePageObj = new HomePage();
+            HomePageObj.GoToTMPage(driver);
 
-//TM Page Object Initialization and Definition
+        }
+        [Test]
+        public void CreateTMStep()
+        {
+            // TM Page Object Initialization and Definition
 
-TMPage TMPageObj = new TMPage();
-TMPageObj.CreateTMPage(driver);
+            TMPage TMPageObj = new TMPage();
+            TMPageObj.CreateTMPage(driver);
 
-//Edit TM Page Object Initialization and Definition
+        }
+        [Test]
+        public void EditTMStep()
+        {
+            //Edit TM Page Object Initialization and Definition
+            TMPage TMPageObj = new TMPage();
+            TMPageObj.EditTMPage(driver);
 
-TMPageObj.EditTMPage(driver);
+        }
+        [Test]
+        public void DeleteTMStep()
+        {
+            //Delete TM Page Object Initialization and Definition
+            TMPage TMPageObj = new TMPage();
+            TMPageObj.DeleteTMPage(driver);
 
-//Delete TM Page Object Initialization and Definition
-
-TMPageObj.DeleteTMPage(driver);
-
-
-        
-
+        }
+        [TearDown]
+        public void CloseTestRun()
+        {
+            driver.Quit();
+        }
+    }
+}
