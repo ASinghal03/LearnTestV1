@@ -12,54 +12,37 @@ using LearnTestV1.Utilities;
 namespace LearnTestV1.Test
 {
     [TestFixture]
+    [Parallelizable]
     public class TM_Test : CommonDriver
     {
-        [SetUp]
-        public void LoginSteps()
-        {
-            // Open Web Browser
-            driver = new ChromeDriver();
-            driver.Manage().Window.Maximize();
-
-            //Login Page Object Initialization and Definition
-            LoginPage LoginPageObj = new LoginPage();
-            LoginPageObj.LoginActions(driver);
-
-            //Home Page Object Initialization and Definition
-
-            HomePage HomePageObj = new HomePage();
-            HomePageObj.GoToTMPage(driver);
-
-        }
-        [Test]
+        HomePage HomePageObj = new HomePage();
+        TMPage TMPageObj = new TMPage();
+        
+        [Test,Order(1)]
         public void CreateTMStep()
         {
             // TM Page Object Initialization and Definition
 
-            TMPage TMPageObj = new TMPage();
+            HomePageObj.GoToTMPage(driver);
             TMPageObj.CreateTMPage(driver);
 
         }
-        [Test]
+        [Test, Order(2)]
         public void EditTMStep()
         {
             //Edit TM Page Object Initialization and Definition
-            TMPage TMPageObj = new TMPage();
+            HomePageObj.GoToTMPage(driver);
             TMPageObj.EditTMPage(driver);
 
         }
-        [Test]
+        [Test, Order(3)]
         public void DeleteTMStep()
         {
             //Delete TM Page Object Initialization and Definition
-            TMPage TMPageObj = new TMPage();
+            HomePageObj.GoToTMPage(driver);
             TMPageObj.DeleteTMPage(driver);
 
         }
-        [TearDown]
-        public void CloseTestRun()
-        {
-            driver.Quit();
-        }
+        
     }
 }

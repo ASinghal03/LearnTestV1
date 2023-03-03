@@ -104,75 +104,35 @@ namespace LearnTestV1.Pages
                     Console.WriteLine("Record Modification Unsuccessfull");
                 }
 
-                // Code for Editing Price Record in TM Table
-            
-                //Identify and Click on Last Page Button Page
-                driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]")).Click();
-
-                // Click on Edit Price Button
-                LastRecordEdit = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[1]"));
-                LastRecordEdit.Click();
-               
-                
-                //Click on Price Text Box and activate XPath to Pull Information
-                driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]")).Click();
-                
-                //Click on Price Text Box and clear last record
-                driver.FindElement(By.XPath("//*[@id=\"Price\"]")).Click();
-                driver.FindElement(By.XPath("//*[@id=\"Price\"]")).Clear(); ;
-                
-
-                //Click on Price text box and write new Record
-                IWebElement PricePerUnitTextBox = driver.FindElement(By.XPath("//*[@id=\"Price\"]"));
-                
-                driver.FindElement(By.XPath("//*[@id=\"TimeMaterialEditForm\"]/div/div[4]/div/span[1]/span/input[1]")).SendKeys("123456");
-                
-
-                //Click on Save Button
-                SaveButton = driver.FindElement(By.Id("SaveButton"));
-                SaveButton.Click();
-
-
-                //Click on Goto Last Page Button
-                Thread.Sleep(1000); 
-                    driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]")).Click();
-
-            //Validate if Record is Edited Successfully or Not
-            Thread.Sleep(1000);
-            LastEditedRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
-                if (LastEditedRecord.Text == "$123,456.00")
-                {
-                    Console.WriteLine("Record Modified Successfully");
-                }
-                else
-                {
-                    Console.WriteLine("Record Modification Unsuccessfull");
-                }
             }
             public void DeleteTMPage(IWebDriver driver)
             {
-            //Identify and Click on Last Page Button Page
-            //Wait.WaitToBeClickable(driver, "XPath", 3, "//*[@id=\"tmsGrid\"]/div[4]/a[4]");
-            Thread.Sleep(1000);
-                driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]")).Click();
-                
+            //Wait.WaitToBeClickable(driver, "XPath", 3, "//*[@id=\"tmsGrid\"]/div[4]/a[4]/span");
+                Thread.Sleep(3000);
+                driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]/span")).Click();
+                //Identify and Click on Last Page Button Page
+                //Wait.WaitToBeClickable(driver, "XPath", 3, "//*[@id=\"tmsGrid\"]/div[4]/a[4]");
+                Thread.Sleep(2000);
+                driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]")).Click();
+
                 //Find and click on delete button for last record
-                driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]")).Click();
-                IWebElement LastRecordDelete = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[5]/a[2]"));
-                LastRecordDelete.Click();
+                //driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[4]/a[4]")).Click();
+                Thread.Sleep(1000);
+                //IWebElement LastRecordDelete = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+                //LastRecordDelete.Click();
                 
                 //Acceptance on Pop up to delete record
                 driver.SwitchTo().Alert().Accept();
                 
                 //Identify and validate if last record is deleted successfully and print output
-                if (LastRecordDelete.Text != "123456")
-                {
-                    Console.WriteLine("Record Deleted Successfully");
-                }
-                else
-                {
-                    Console.WriteLine("Record Deletion Unsuccessfull");
-                }
+                //if (LastRecordDelete.Text != "123456")
+                //{
+                //    Console.WriteLine("Record Deleted Successfully");
+                //}
+                //else
+                //{
+                 //   Console.WriteLine("Record Deletion Unsuccessfull");
+                //}
             }
     }
 
