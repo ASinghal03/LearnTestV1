@@ -55,17 +55,27 @@ namespace LearnTestV1.Pages
                 //Validate Last Record
                 IWebElement LastRecord = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
                 //Thread.Sleep(1000);
-                if (LastRecord.Text == "123")
-                {
-                    Console.WriteLine("New Record Created Successful");
-                }
-                else
-                {
-                    Console.WriteLine("Unable to create a new Record");
-                }
+               
 
             }
-            public void EditTMPage(IWebDriver driver) 
+        public string GetCode(IWebDriver driver)
+        {
+            IWebElement actualCode = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[1]"));
+            return actualCode.Text;
+        }
+
+        public string GetDescription(IWebDriver driver)
+        {
+            IWebElement actualDescription = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[3]"));
+            return actualDescription.Text;
+        }
+
+        public string GetPrice(IWebDriver driver)
+        {
+            IWebElement actualPrice = driver.FindElement(By.XPath("//*[@id=\"tmsGrid\"]/div[3]/table/tbody/tr[last()]/td[4]"));
+            return actualPrice.Text;
+        }
+            public void EditTMPage(IWebDriver driver, string code, string price, string desc) 
             {
             // Click on Edit Buttonto make changes to type Code
             Thread.Sleep(1000);
@@ -80,11 +90,15 @@ namespace LearnTestV1.Pages
 
                 //Identify Code Text Box and Write New Record
                 IWebElement CodeTextBox = driver.FindElement(By.XPath("//*[@id=\"Code\"]"));
-                CodeTextBox.SendKeys("123456");
+                CodeTextBox.SendKeys(code);
                 
-
-                //Identify and Click on Save Button
-                IWebElement SaveButton = driver.FindElement(By.Id("SaveButton"));
+                IWebElement priceTextBox = driver.FindElement(By.XPath("//*[@id=\"Price\"]"));
+                CodeTextBox.SendKeys(price);
+                
+                IWebElement descriptionTextBox = driver.FindElement(By.XPath("//*[@id=\"Description\"]"));
+                CodeTextBox.SendKeys(desc);
+            //Identify and Click on Save Button
+            IWebElement SaveButton = driver.FindElement(By.Id("SaveButton"));
                 SaveButton.Click();
 
 

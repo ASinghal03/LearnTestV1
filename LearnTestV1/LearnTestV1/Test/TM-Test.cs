@@ -32,7 +32,7 @@ namespace LearnTestV1.Test
         {
             //Edit TM Page Object Initialization and Definition
             HomePageObj.GoToTMPage(driver);
-            TMPageObj.EditTMPage(driver);
+            //TMPageObj.EditTMPage(driver);
 
         }
         [Test, Order(3)]
